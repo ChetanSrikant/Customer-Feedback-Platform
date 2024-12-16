@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
-import './LoginPage.css';
-import assets from '../../../assets/assets';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
+import assets from "../../../assets/assets";
 
-const LoginPage = () => {
+const LoginPage = ({ setUser }) => {
   const [currentState, setCurrentState] = useState("Sign Up");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate(); // Hook for navigation
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(currentState, userName, email, password);
+
+    // Simulate account creation or login process
+    if (currentState === "Sign Up") {
+      const newUser = {
+        name: userName,
+        email,
+      };
+      setUser(newUser); // Update the user state in App.jsx
+      navigate("/dashboard"); // Redirect to the dashboard
+    } else if (currentState === "Login") {
+      const existingUser = {
+        name: "Existing User", // Replace with actual user logic
+        email,
+      };
+      setUser(existingUser); // Update the user state
+      navigate("/dashboard"); // Redirect to the dashboard
+    }
   };
 
   return (
     <div className="login">
       <div>
-        <img className="logo" src={assets.logo_big} alt="" />
+        <img className="logo" src={assets.logo_big} alt="Logo" />
         <h1>Customer Feedback Platform</h1>
       </div>
       <form onSubmit={onSubmitHandler} className="login-form">
@@ -51,10 +70,9 @@ const LoginPage = () => {
           {currentState === "Sign Up" ? "Create Account" : "Login now"}
         </button>
         <div className="login-term">
-          <input type="checkbox" />
+          <input type="checkbox" required />
           <p>Agree to the terms and conditions of use & privacy policy</p>
         </div>
-
         <div className="login-switch">
           {currentState === "Sign Up" ? (
             <p className="login-toggle">
