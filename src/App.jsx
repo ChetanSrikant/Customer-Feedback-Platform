@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom"; // Import useLocation to access the current route
 import NavBar from "./components/Navbar/Navbar";
 import LoginPage from "./components/Pages/Login/LoginPage";
 import Dashboard from "./components/Pages/Dashboard/Dashboard";
@@ -21,8 +21,12 @@ const App = () => {
     }
   }, [user]);
 
+  const location = useLocation(); // Get the current route
+
   return (
     <>
+      {/* Only render the NavBar if we're not on the LoginPage */}
+      {location.pathname !== "/" && <NavBar user={user} setUser={setUser} />}
       
       <Routes>
         <Route
@@ -33,7 +37,7 @@ const App = () => {
           path="/dashboard"
           element={
             user ? (
-              <Dashboard />
+              <Dashboard user={user} setUser={setUser} />
             ) : (
               <p>Please log in to access the dashboard.</p>
             )

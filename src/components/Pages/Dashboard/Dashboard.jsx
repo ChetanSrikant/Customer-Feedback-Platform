@@ -1,17 +1,17 @@
 import React from "react";
 import FeedbackForm from "../../Feedback/FeedbackForm";
 import FeedbackList from "../../Feedback/FeedbackList";
+import NavBar from "../../Navbar/Navbar";
 import "./Dashboard.css";
 
 const Dashboard = ({ user, handleLogout }) => {
   return (
+    <>
+    
     <div className="dashboard">
       <header className="dashboard-header">
         <h1>Welcome, {user?.name || "User"}!</h1>
         <p>Submit your feedback and see what others are saying.</p>
-        <button onClick={handleLogout} className="logout-button">
-          Logout
-        </button>
       </header>
 
       <div className="dashboard-content">
@@ -27,6 +27,7 @@ const Dashboard = ({ user, handleLogout }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

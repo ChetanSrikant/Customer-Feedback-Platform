@@ -1,4 +1,5 @@
-.login{
+/* Basic layout and background */
+.login {
     min-height: 100vh;
     background: url(/background.jpg) no-repeat;
     background-size: cover;
@@ -7,16 +8,16 @@
     align-items: center;
 }
 
-
+/* Logo styling */
 .login .logo {
     width: max(20vw, 200px);
-    opacity: 0.75; 
-    display: flex;
+    opacity: 0.75;
     display: block; /* Ensure it's treated as a block element */
     margin-bottom: 10px;
     margin-left: 27%;
 }
 
+/* Heading style */
 h1 {
     font-size: 3em;
     color: white;
@@ -27,8 +28,9 @@ h1 {
     opacity: 0.8;
 }
 
+/* Form container */
 .login-form {
-    background: rgba(255, 255, 255, 0.8); 
+    background: rgba(255, 255, 255, 0.8);
     padding: 20px 30px;
     display: flex;
     flex-direction: column;
@@ -37,11 +39,13 @@ h1 {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Form title */
 .login-form h2 {
     font-weight: 500;
     color: #8B4513;
 }
 
+/* Input styling */
 .form-input {
     padding: 8px 10px;
     border: 1px solid #c9c9c9;
@@ -49,9 +53,10 @@ h1 {
     outline-color: #D2691E;
 }
 
+/* Button styling */
 .login-form button {
     padding: 10px;
-    background-color: #D2691E; 
+    background-color: #D2691E;
     color: white;
     font-size: 16px;
     border: none;
@@ -60,10 +65,12 @@ h1 {
     transition: background-color 0.3s;
 }
 
+/* Hover effect for buttons */
 .login-form button:hover {
     background-color: #A0522D;
 }
 
+/* Terms and conditions checkbox section */
 .login-term {
     display: flex;
     gap: 5px;
@@ -71,27 +78,58 @@ h1 {
     color: #8B4513;
 }
 
+/* Switch between Sign Up/Login section */
 .login-switch {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
+/* Toggle text style */
 .login-toggle {
     font-size: 13px;
     color: #5c5c5c;
 }
 
+/* Style for clickable "Login here" or "Create account" links */
 .login-toggle span {
     font-weight: 500;
     color: #D2691E;
     cursor: pointer;
 }
 
-@media(max-width: 768px) {
+/* Google Login Section */
+.google-login {
+    
+    text-align: center;
+}
+
+.google-login h3 {
+    font-size: 16px;
+    color: #8B4513;
+    margin-bottom: 10px;
+}
+
+/* Media query for responsive layout */
+@media (max-width: 768px) {
     .login {
         flex-direction: column;
         justify-content: center;
         gap: 30px;
+    }
+
+    .login .logo {
+        margin-left: 0;
+        width: 60%;
+        margin-bottom: 20px;
+    }
+
+    .login-form {
+        width: 80%;
+        margin-top: 20px;
+    }
+
+    .google-login h3 {
+        font-size: 14px;
     }
 }

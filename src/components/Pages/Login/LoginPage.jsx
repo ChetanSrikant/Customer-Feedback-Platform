@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google"; // Import Google Login
 import "./LoginPage.css";
 import assets from "../../../assets/assets";
 
@@ -30,6 +31,28 @@ const LoginPage = ({ setUser }) => {
       setUser(existingUser); // Update the user state
       navigate("/dashboard"); // Redirect to the dashboard
     }
+  };
+
+  // Google Login Success Handler
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    console.log("Google Login Success", credentialResponse);
+
+    // Decode the token and extract user information
+    const decodedToken = JSON.parse(atob(credentialResponse.credential.split(".")[1]));
+    const { name, email, picture } = decodedToken;
+
+    // Set the user data from the decoded token
+    setUser({
+      name: name || "Google User",
+      email: email || "user@example.com",
+      picture: picture || "https://www.example.com/default-picture.png", // Set a default picture if not available
+    });
+
+    navigate("/dashboard"); // Redirect to the dashboard
+  };
+
+  const handleGoogleLoginFailure = () => {
+    console.log("Google Login Failed");
   };
 
   return (
@@ -69,10 +92,23 @@ const LoginPage = ({ setUser }) => {
         <button type="Submit">
           {currentState === "Sign Up" ? "Create Account" : "Login now"}
         </button>
+
+        {/* Google Login Button */}
+        {currentState === "Sign Up" && (
+          <div className="google-login">
+            <h3>Or Sign Up with Google</h3>
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={handleGoogleLoginFailure}
+            />
+          </div>
+        )}
+
         <div className="login-term">
           <input type="checkbox" required />
           <p>Agree to the terms and conditions of use & privacy policy</p>
         </div>
+
         <div className="login-switch">
           {currentState === "Sign Up" ? (
             <p className="login-toggle">
